@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "jobsearch_crew"
+version = "0.1.0"
+description = "jobsearch-crew using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = {extras = ["tools"], version = "^0.28.8"}
+setuptools = "^75.8.0"
+
+[tool.poetry.scripts]
+jobsearch_crew = "jobsearch_crew.main:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
