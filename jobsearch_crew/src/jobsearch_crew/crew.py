@@ -65,7 +65,7 @@ class JobsearchCrewCrew():
 		return Task(
 			config=self.tasks_config['research_task'],
 			agent=self.researcher(),
-			# async_execution=True,
+			sync_execution=True,
 			context=[]
 		)
 
@@ -74,7 +74,7 @@ class JobsearchCrewCrew():
 		return Task(
 			config=self.tasks_config['profile_task'],
 			agent=self.profiler(),
-			# async_execution=True
+			sync_execution=True
 		)
 
 	@task
@@ -82,7 +82,7 @@ class JobsearchCrewCrew():
 		return Task(
 			config=self.tasks_config['resume_strategy_task'],
 			agent=self.resume_strategist(),
-			output_file="tailored_resume.md",
+			output_file="./resume/tailored_resume.md",
 			context=[self.research_task(), self.profile_task()] 
 		)
 	
@@ -91,7 +91,7 @@ class JobsearchCrewCrew():
 		return Task(
 			config=self.tasks_config['interview_preparation_task'],
 			agent=self.interview_preparer(),
-			output_file="interview_materials.md",
+			output_file="./resume/interview_materials.md",
 			context=[self.research_task(), self.profile_task(), self.resume_strategy_task()]
 		)
 	
