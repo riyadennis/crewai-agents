@@ -1,0 +1,30 @@
+datacollection_task:
+  description: >
+    Create an initial understanding of the project, its main featuresand team working on it.
+    Use trello board data fetched tool to fetch information from the board.
+  expected_output: >
+    A full blown report about the project, like its main features, team working on it, and 
+    any other relevant information from the board.
+
+data_analysis_task:
+  description: >
+    Review the context you got and unbderstand the progress of the project from the trello board
+    and identify blockers, delays and overall progress.
+  expected_output: >
+    A summary of the analysis highlighting key issues, blockers, delays and progress.
+
+report_generation_task:
+  description: >
+    Complile a comprehensive report based on the analysis of project data.
+    Report should include:
+      - Sprint Overview
+      - Task Summary
+      - Identified issues and blockers
+      - Progress and Delays
+      - Team performance Overview
+      - Action Items and Recommendations
+      - Anything else relevant to the project
+      Report should be in markdown
+  expected_output: >
+    A fully fledge sprint overview reports that can be submitted to the leadership team.
+    Formated as markdown with out '```'
