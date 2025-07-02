@@ -55,3 +55,8 @@ For support, questions, or feedback regarding the FinancialAgent Crew or crewAI.
 - [Chat wtih our docs](https://chatg.pt/DWjSBZn)
 
 Let's create wonders together with the power and simplicity of crewAI.
+
+## Running tests
+
+```
+poetry run pytest tests/test_agents.py -k test_data_analyst_agent_creation
