@@ -1,5 +1,6 @@
 # Warning control
 import warnings
+import os
 warnings.filterwarnings('ignore')
 
 from crewai import Agent, Crew, Process, Task
@@ -15,6 +16,8 @@ from langchain_openai import ChatOpenAI
 @CrewBase
 class FinancialAgentCrew():
 	"""FinancialAgent crew"""
+	if os.getenv('OPENAI_API_KEY') == '':
+		raise ValueError("OPENAI_API_KEY is not set")
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
 	search_tool = SerperDevTool()
