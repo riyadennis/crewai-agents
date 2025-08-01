@@ -11,6 +11,10 @@ crewai = {extras = ["tools"], version = "^0.28.8"}
 [tool.poetry.scripts]
 sales_pipeline_crew = "sales_pipeline_crew.main:run"
 
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^6.2.1"
+setuptools = "^80.9.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
