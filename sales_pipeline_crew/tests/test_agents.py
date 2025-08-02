@@ -1,4 +1,5 @@
 import pytest
+import os
 from unittest.mock import Mock, patch, MagicMock
 from crewai import Agent
 from sales_pipeline_crew.crew import SalesPipelineCrewCrew
@@ -11,6 +12,10 @@ class TestSalesPipelineCrewAgents:
     def crew_instance(self):
         """Create a crew instance for testing"""
         return SalesPipelineCrewCrew()
+    
+    @pytest.fixture(autouse=True)
+    def set_dummy_openai_key(self):
+        os.environ["OPENAI_API_KEY"] = "dummy"
 
     def test_researcher_agent_creation(self, crew_instance):
         """Test that researcher agent is created with correct configuration"""
@@ -22,7 +27,8 @@ class TestSalesPipelineCrewAgents:
                 'backstory': 'Seasoned researcher with knack for uncovering latest developments'
             }
         }
-        
+        with patch("openai.ChatCompletion.create") as mock_create:
+            mock_create.return_value = {"choices": [{"message": {"content": "mocked response"}}]}
         agent = crew_instance.researcher()
         
         assert isinstance(agent, Agent)
@@ -148,7 +154,9 @@ class TestSalesPipelineCrewAgents:
             'researcher': {'role': 'Test1', 'goal': 'Test1', 'backstory': 'Test1'},
             'reporting_analyst': {'role': 'Test2', 'goal': 'Test2', 'backstory': 'Test2'}
         }
-        
+        with patch("openai.ChatCompletion.create") as mock_create:
+            mock_create.return_value = {"choices": [{"message": {"content": "mocked response"}}]}
+        agent = crew_instance.researcher()
         # Should be able to create just one agent without the other
         researcher = crew_instance.researcher()
         assert isinstance(researcher, Agent)
