@@ -25,6 +25,8 @@ jobs:
           python-version: "3.9"
           cache: 'poetry'
     
+      - name: Set dummy OPENAI_API_KEY
+        run: echo "OPENAI_API_KEY=dummy" >> $GITHUB_ENV
       - name: Install dependencies
         run: poetry install --no-interaction --no-root
         working-directory: sales_pipeline_crew
