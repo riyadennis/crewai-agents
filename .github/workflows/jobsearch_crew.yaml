@@ -1,4 +1,4 @@
-name: Sales Pipeline Crew
+name: Jobsearch Crew
 
 on:
   push:
@@ -24,19 +24,18 @@ jobs:
         with:
           python-version: "3.9"
           cache: 'poetry'
-    
       - name: Set dummy OPENAI_API_KEY
         run: echo "OPENAI_API_KEY=dummy" >> $GITHUB_ENV
       - name: Install dependencies
         run: poetry install --no-interaction --no-root
-        working-directory: sales_pipeline_crew
+        working-directory: jobsearch_crew
       - name: Lint and format Python code with ruff
         run: |
           pipx install ruff
           ruff check --format=github --target-version=py39
           ruff format --diff --target-version=py39
         continue-on-error: true
-        working-directory: sales_pipeline_crew
+        working-directory: jobsearch_crew
       - name: Test with pytest
         run: poetry run pytest
-        working-directory: sales_pipeline_crew
+        working-directory: jobsearch_crew
