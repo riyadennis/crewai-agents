@@ -1,3 +1,4 @@
+import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import (
@@ -16,13 +17,15 @@ from crewai_tools import (
 @CrewBase
 class JobsearchCrewCrew():
 	"""JobsearchCrew crew"""
-	agents_config = 'config/agents.yaml'
-	tasks_config = 'config/tasks.yaml'
-
-	search_tool = SerperDevTool()
-	scrape_tool = ScrapeWebsiteTool()
-	read_resume = FileReadTool(file_path='./resume/riyadennis.md')
-	semantic_search_resume = MDXSearchTool(mdx='./resume/riyadennis.md')
+	def __init__(self):
+		if os.getenv('OPENAI_API_KEY', '') == '':
+			raise ValueError("OPENAI_API_KEY is not set")
+		self.agents_config = 'config/agents.yaml'
+		self.tasks_config = 'config/tasks.yaml'
+		self.search_tool = SerperDevTool()
+		self.scrape_tool = ScrapeWebsiteTool()
+		self.read_resume = FileReadTool(file_path='./resume/riyadennis.md')
+		self.semantic_search_resume = MDXSearchTool(mdx='./resume/riyadennis.md')
 
 	@agent
 	def researcher(self) -> Agent:

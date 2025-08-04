@@ -12,12 +12,13 @@ The crew consists of four specialized agents:
 # Warning control
 import warnings
 import os
-warnings.filterwarnings('ignore')
 
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 from langchain_openai import ChatOpenAI
+
+warnings.filterwarnings('ignore')
 
 
 
