@@ -2,7 +2,7 @@ name: Financial Agent Crew
 
 on:
   push:
-    branches: [ "main", "financial_agent_workflow" ]
+    branches: [ "main"]
   pull_request:
     branches: [ "main" ]
 
