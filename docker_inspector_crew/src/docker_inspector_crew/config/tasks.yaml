@@ -1,0 +1,79 @@
+container_inventory_task:
+  description: >
+    Use the available Docker tools to collect a full inventory of this machine.
+    Retrieve all containers (running AND stopped) and all local images.
+    Organise the data clearly so the analyst can work with it.
+  expected_output: >
+    A structured summary containing:
+    - Total number of containers (running / stopped)
+    - Total number of images
+    - Full list of containers with: ID, name, image, status, ports, created date
+    - Full list of images with: ID, repository:tag, size, created date
+
+duplicate_analysis_task:
+  description: >
+    Using the inventory produced by the collector, identify duplicate or
+    redundant Docker containers on this machine. Look for:
+    1. Multiple containers created from the same image
+    2. Containers with nearly identical names (e.g. app_1, app_2, app-v2)
+    3. Stopped containers that have a running equivalent (shadow/stale containers)
+    4. Containers exposing the same host port (port conflicts)
+    5. Duplicate images (same digest / same repo with multiple tags pointing
+       to the same layer)
+  expected_output: >
+    A detailed duplicate report structured as follows:
+    ## Docker Duplicate Report
+
+    ### Summary
+    - Total containers inspected: N
+    - Duplicate groups found: N
+    - Stale / stopped duplicates: N
+    - Port conflicts: N
+
+    ### Duplicate Groups
+    For each group: list container names, image used, status, and why they
+    are considered duplicates.
+
+    ### Port Conflicts
+    List any containers binding the same host port.
+
+    ### Duplicate Images
+    List images that appear more than once (multiple tags for identical content).
+
+    ### Recommendations
+    Prioritised list of containers/images that can safely be removed or
+    consolidated, with the reason for each recommendation.
+
+cleanup_task:
+  description: >
+    Using the duplicate analysis report, clean up this machine's Docker environment.
+    Follow these rules strictly:
+    1. Remove only stopped/exited containers flagged by the analyst as duplicates
+       or stale. Use the single-container removal tool for precision, or the
+       bulk prune tool if the analyst recommends wiping all stopped containers.
+    2. Never attempt to remove a running container.
+    3. After containers are removed, prune all dangling (<none>:<none>) images.
+    4. If the analyst flagged specific tagged images as unused duplicates, remove
+       them individually with the image removal tool — only if NO container
+       (running or stopped) depends on them.
+    5. Record every action taken (removed / skipped / failed) for the audit log.
+  expected_output: >
+    ## Docker Cleanup Report
+
+    ### Containers Removed
+    List each removed container: name, ID, image it used, reason for removal.
+
+    ### Containers Skipped
+    Any container the analyst flagged but that could not be safely removed,
+    with the reason (e.g. still running, removal failed).
+
+    ### Images Pruned
+    Total space reclaimed from dangling image prune, and any tagged images
+    individually removed.
+
+    ### Images Skipped
+    Tagged images that were flagged but skipped because a container still
+    references them.
+
+    ### Space Reclaimed
+    Total disk space freed by this cleanup run.
