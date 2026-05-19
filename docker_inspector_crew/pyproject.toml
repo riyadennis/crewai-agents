@@ -8,7 +8,7 @@ authors = ["Your Name <you@example.com>"]
 python = ">=3.10,<=3.13"
 crewai = {extras = ["tools"], version = "^0.28.8"}
 langchain-anthropic = ">=0.1.0,<0.2.0"
-setuptools = "^69.0.0"
+setuptools = ">=69,<79"
 
 [tool.poetry.scripts]
 docker_inspector_crew = "docker_inspector_crew.main:run"
