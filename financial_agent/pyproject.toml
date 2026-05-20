@@ -7,7 +7,7 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
 crewai = {extras = ["tools"], version = "^0.28.8"}
-setuptools = "^69.0.0"
+setuptools = "^78.1.1"
 ipython = "^8.31.0"
 
 [tool.poetry.scripts]
