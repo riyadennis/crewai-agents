@@ -7,7 +7,7 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
 crewai = {extras = ["tools"], version = "^0.28.8"}
-setuptools = "^75.8.0"
+setuptools = ">=75.8,<79.0"
 
 [tool.poetry.scripts]
 jobsearch_crew = "jobsearch_crew.main:run"
