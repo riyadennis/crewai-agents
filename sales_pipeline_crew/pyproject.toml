@@ -13,7 +13,7 @@ sales_pipeline_crew = "sales_pipeline_crew.main:run"
 
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^6.2.1"
-setuptools = "^80.9.0"
+setuptools = ">=80.9,<84.0"
 
 [build-system]
 requires = ["poetry-core"]
